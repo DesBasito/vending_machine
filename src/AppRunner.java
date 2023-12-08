@@ -53,8 +53,8 @@ public class AppRunner {
         if ("a".equalsIgnoreCase(action)) {
             return " Вы выбрали наличную оплату\n a - Пополнить баланс";
         } else if ("p".equalsIgnoreCase(action)) {
-//            checkCard("Номер банковской карточки: ");
-//            checkPassword("Пароль: ");
+            checkCard("Номер банковской карточки: ");
+            checkPassword("Пароль: ");
             new Scanner(System.in).nextLine();
             return " Вы выбрали оплату банковской картой";
         } else {
@@ -62,32 +62,31 @@ public class AppRunner {
             return choiceOfPayMeth();
         }
     }
-//    private Long checkCard(String str) {
-//        print(str);
-//        try {
-//            String num = fromConsole();
-//            if ( num.toCharArray().length > 11 && num.toCharArray().length < 16) {
-//                throw new RuntimeException(String.format("%s: ", "Enter a bank card correctly!"));
-//            }
-//            return Long.parseLong(num);
-//        } catch (RuntimeException e) {
-//            return checkCard(e.getMessage());
-//        }
-//    }
-//
-//    private Integer checkPassword(String str) {
-//        print(str);
-//        try {
-//            String num = fromConsole();
-//            if (num.toCharArray().length != 4 ) {
-//                throw new RuntimeException(String.format("%s: ", "Enter a password correctly!(only 4 numbers)"));
-//            }
-//            return Integer.parseInt(num);
-//        } catch (RuntimeException e) {
-//            return checkPassword(e.getMessage());
-//        }
-//    }
+    private Long checkCard(String str) {
+        print(str);
+        try {
+            String num = fromConsole();
+            if ( num.toCharArray().length > 11 && num.toCharArray().length < 16) {
+                throw new RuntimeException(String.format("%s: ", "Enter a bank card correctly!"));
+            }
+            return Long.parseLong(num);
+        } catch (RuntimeException e) {
+            return checkCard(e.getMessage());
+        }
+    }
 
+    private Integer checkPassword(String str) {
+        print(str);
+        try {
+            String num = fromConsole();
+            if (num.toCharArray().length != 4 ) {
+                throw new RuntimeException(String.format("%s: ", "Enter a password correctly!(only 4 numbers)"));
+            }
+            return Integer.parseInt(num);
+        } catch (RuntimeException e) {
+            return checkPassword(e.getMessage());
+        }
+    }
 
     private UniversalArray<Product> getAllowedProducts(String str) {
         UniversalArray<Product> allowProducts = new UniversalArrayImpl<>();
