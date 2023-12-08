@@ -139,8 +139,12 @@ public class AppRunner {
                 }
             }
         } catch (IllegalArgumentException e) {
-            print("Недопустимая буква. Попробуйте еще раз.");
-            chooseAction(products, str);
+            if ("h".equalsIgnoreCase(action)) {
+                isExit = false;
+            }else {
+                print("Недопустимая буква. Попробуйте еще раз.");
+                chooseAction(products, str);
+            }
         }
     }
 
