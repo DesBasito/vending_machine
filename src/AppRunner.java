@@ -144,8 +144,6 @@ public class AppRunner {
                 chooseAction(products, str);
             }
         }
-
-
     }
 
     private void showActions(UniversalArray<Product> products) {
