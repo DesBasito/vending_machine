@@ -70,7 +70,7 @@ public class AppRunner {
         print(str);
         try {
             String num = fromConsole();
-            if (num.toCharArray().length > 11 && num.toCharArray().length < 16) {
+            if (num.toCharArray().length < 16) {
                 throw new RuntimeException(String.format("%s: ", "Enter a bank card correctly!"));
             }
             return Long.parseLong(num);
