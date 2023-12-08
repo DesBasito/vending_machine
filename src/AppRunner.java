@@ -14,7 +14,7 @@ public class AppRunner {
 
     private final Acceptor[] paymentMethod;
 
-    private static boolean isExit = false;
+    private static boolean isExit = true;
 
     private AppRunner() {
         products.addAll(new Product[]{
@@ -30,7 +30,7 @@ public class AppRunner {
 
     public static void run() {
         AppRunner app = new AppRunner();
-        while (!isExit) {
+        while (isExit) {
             app.startSimulation();
         }
     }
@@ -70,7 +70,7 @@ public class AppRunner {
         print(str);
         try {
             String num = fromConsole();
-            if ( num.toCharArray().length > 11 && num.toCharArray().length < 16) {
+            if (num.toCharArray().length > 11 && num.toCharArray().length < 16) {
                 throw new RuntimeException(String.format("%s: ", "Enter a bank card correctly!"));
             }
             return Long.parseLong(num);
@@ -83,7 +83,7 @@ public class AppRunner {
         print(str);
         try {
             String num = fromConsole();
-            if (num.toCharArray().length != 4 ) {
+            if (num.toCharArray().length != 4) {
                 throw new RuntimeException(String.format("%s: ", "Enter a password correctly!(only 4 numbers)"));
             }
             return Integer.parseInt(num);
@@ -123,7 +123,9 @@ public class AppRunner {
             }
             return;
         }
-
+        if ("h".equalsIgnoreCase(action)) {
+            isExit = false;
+        }
         try {
             for (int i = 0; i < products.size(); i++) {
                 if (products.get(i).getActionLetter().equals(ActionLetter.valueOf(action.toUpperCase()))) {
@@ -137,15 +139,9 @@ public class AppRunner {
                 }
             }
         } catch (IllegalArgumentException e) {
-            if ("h".equalsIgnoreCase(action)) {
-                isExit = true;
-            } else {
-                print("Недопустимая буква. Попробуйте еще раз.");
-                chooseAction(products, str);
-            }
+            print("Недопустимая буква. Попробуйте еще раз.");
+            chooseAction(products, str);
         }
-
-
     }
 
     private void showActions(UniversalArray<Product> products) {
