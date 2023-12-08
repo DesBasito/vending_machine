@@ -42,11 +42,52 @@ public class AppRunner {
         print("Монет на сумму: " + paymentMethod[0].getAmount());
         print("Баланс на карте: " + paymentMethod[1].getAmount());
         UniversalArray<Product> allowProducts = new UniversalArrayImpl<>();
-//        String str = choiceOfPayMeth();
-//        allowProducts.addAll(getAllowedProducts(str).toArray());
-//        chooseAction(allowProducts, str);
-
+        String str = choiceOfPayMeth();
+        allowProducts.addAll(getAllowedProducts(str).toArray());
+        chooseAction(allowProducts, str);
     }
+
+    private String choiceOfPayMeth() {
+        System.out.print("\nВыберите способ оплаты: \na - наличными\np - банковской картой\nспособ оплаты: ");
+        String action = fromConsole().substring(0, 1);
+        if ("a".equalsIgnoreCase(action)) {
+            return " Вы выбрали наличную оплату\n a - Пополнить баланс";
+        } else if ("p".equalsIgnoreCase(action)) {
+//            checkCard("Номер банковской карточки: ");
+//            checkPassword("Пароль: ");
+            new Scanner(System.in).nextLine();
+            return " Вы выбрали оплату банковской картой";
+        } else {
+            print("Выбери только один из двух!");
+            return choiceOfPayMeth();
+        }
+    }
+//    private Long checkCard(String str) {
+//        print(str);
+//        try {
+//            String num = fromConsole();
+//            if ( num.toCharArray().length > 11 && num.toCharArray().length < 16) {
+//                throw new RuntimeException(String.format("%s: ", "Enter a bank card correctly!"));
+//            }
+//            return Long.parseLong(num);
+//        } catch (RuntimeException e) {
+//            return checkCard(e.getMessage());
+//        }
+//    }
+//
+//    private Integer checkPassword(String str) {
+//        print(str);
+//        try {
+//            String num = fromConsole();
+//            if (num.toCharArray().length != 4 ) {
+//                throw new RuntimeException(String.format("%s: ", "Enter a password correctly!(only 4 numbers)"));
+//            }
+//            return Integer.parseInt(num);
+//        } catch (RuntimeException e) {
+//            return checkPassword(e.getMessage());
+//        }
+//    }
+
 
     private UniversalArray<Product> getAllowedProducts(String str) {
         UniversalArray<Product> allowProducts = new UniversalArrayImpl<>();
@@ -83,7 +124,7 @@ public class AppRunner {
             }
         } catch (IllegalArgumentException e) {
             print("Недопустимая буква. Попрбуйте еще раз.");
-//            chooseAction(products);
+            chooseAction(products,str);
         }
 
 
